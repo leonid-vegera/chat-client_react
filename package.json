@@ -10,7 +10,8 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3030 && react-scripts start",
+    "lint" : "eslint --fix",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -32,5 +33,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
