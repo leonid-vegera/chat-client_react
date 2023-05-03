@@ -5,29 +5,21 @@ import {MessageForm} from './MessageForm.jsx';
 import {MessageList} from './MessageList.jsx';
 import axios from 'axios';
 import {LongPollingLoader} from './LongPolling';
+import {ServerSentEventsLoader} from './ServerSentEvents';
 // #endregion
 
 const API_URL = 'http://127.0.0.1:5050/messages';
 const DataLoader = ({onData}) => {
-  function loadData() {
-    axios.get(API_URL)
-        .then(res => {
-          onData(res.data);
-
-          loadData();
-        })
-  }
-
   return (
-      <LongPollingLoader loadData={loadData}/>
+      <ServerSentEventsLoader onData={onData} api={API_URL}/>
   )
 };
 
 export function App() {
   const [messages, setMessages] = useState([]);
 
-  function saveData(messagesFromServer) {
-    setMessages(messagesFromServer)
+  function saveData(message) {
+    setMessages(current => [message, ...current])
   }
 
   return (
