@@ -8,6 +8,10 @@ export function ServerSentEventsLoader({onData, api}) {
       const message = JSON.parse(event.data)
       onData(message);
     }
+
+    return () => {
+      source.close();
+    }
   }, [])
 
   return <h1 className="title">Server Sent Events</h1>;
