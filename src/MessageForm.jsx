@@ -1,34 +1,27 @@
-import {useState} from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
-const API_URL = 'http://127.0.0.1:5050/messages';
-
-function sendMessage(text) {
-  return axios.post(API_URL, {text});
-}
-
-export const MessageForm = () => {
+export const MessageForm = ({ sendMessage }) => {
   const [text, setText] = useState('');
 
   return (
-      <form
-          className="field is-horizontal"
-          onSubmit={async (event) => {
-            event.preventDefault();
+    <form
+      className="field is-horizontal"
+      onSubmit={async (event) => {
+        event.preventDefault();
 
-            await sendMessage(text);
+        await sendMessage(text);
 
-            setText('');
-          }}
-      >
-        <input
-            type="text"
-            className="input"
-            placeholder="Enter a message"
-            value={text}
-            onChange={event => setText(event.target.value)}
-        />
-        <button className="button">Send</button>
-      </form>
+        setText('');
+      }}
+    >
+      <input
+        type="text"
+        className="input"
+        placeholder="Enter a message"
+        value={text}
+        onChange={event => setText(event.target.value)}
+      />
+      <button className="button">Send</button>
+    </form>
   );
 };
